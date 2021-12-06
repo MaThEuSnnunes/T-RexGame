@@ -46,16 +46,15 @@ function draw(){
   text(mouseX+","+mouseY,mouseX,mouseY)
 //console.log(trex.y)
 
-  if(keyDown("up")) {
-  trex.velocityY=-10;
-  
-  }
   if (estadoDoJogo==jogando ) {
   chao.velocityX=-6;
+  spawnClouds();
+  gerarcacto ();
   if (chao.x<0) {
     chao.x=chao.width/2
+
     }
-  if(keyDown("up")) {
+  if(keyDown("up")&& trex.y > 240) {
   trex.velocityY=-10;
       
       }
@@ -72,15 +71,12 @@ function draw(){
     trex.velocityY=0
     grupoCactos.setVelocityXEach(0);
     grupoCloud.setVelocityXEach(0);
-
+    grupoCactos.setLifetimeEach(-1);
+    grupoCloud.setLifetimeEach(-1);
   }
 
 
-
-
   trex.collide(chaoInvisivel)
-  spawnClouds();
-  gerarcacto ();
   drawSprites();
 
 }
@@ -88,7 +84,7 @@ function draw(){
 function spawnClouds(){
   
   if (frameCount%100===0) {
-   cloud = createSprite(600,25,40,10);
+   cloud = createSprite(605,25,40,10);
    cloud.velocityX = -3;
    cloud.addImage(imgcloud);
    cloud.scale = 0.6;
@@ -102,7 +98,7 @@ function spawnClouds(){
 }
 function gerarcacto () {
 if (frameCount % 140==0) {
-  var cactos = createSprite(600,240,1,1);
+  var cactos = createSprite(605,240,1,1);
   cactos.velocityX = -6;
   cactos.scale = 0.8;
   var cactosr = Math.round(random(1,6));
